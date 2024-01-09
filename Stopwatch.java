@@ -1,7 +1,7 @@
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.text.*;
 
 public class Stopwatch implements ActionListener {
 
@@ -111,6 +111,7 @@ public class Stopwatch implements ActionListener {
 
     void reset() {
         timer.stop();
+
         elapsedTime = 0;
         seconds = 0;
         minutes = 0;
@@ -123,6 +124,20 @@ public class Stopwatch implements ActionListener {
 
     public void updateleaderboard()
     {
-        System.out.print("hi");
+        if (elapsedTime > leaderboard1)
+        {
+            int temp1 = leaderboard1;
+            int temp2 = leaderboard2;
+            leaderboard1 = elapsedTime;
+            leaderboard2= temp1;
+            leaderboard3= temp2;
+        }
+    }
+
+    public void setupleaderboard()
+    {
+        JTextField Leaderboard = new JTextField();
+        Leaderboard.setText(leadername1 + "00:00:00");
+        Leaderboard.setBounds();
     }
 }

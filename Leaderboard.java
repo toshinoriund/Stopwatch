@@ -5,6 +5,6 @@ import javax.swing.*;
 
 public class Leaderboard
 {
-    JFrame frame = new JFrame();
+    private Person[] leaders;
 
 }

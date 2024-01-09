@@ -18,6 +18,8 @@ public class Stopwatch implements ActionListener {
     private String leadername2 = "N/A";
     private String leadername3 = "N/A";
 
+    private Person[] leaders = new Person[3];
+
 
     private int leaderboard1=0;
     private int leaderboard2=0;
@@ -33,7 +35,7 @@ public class Stopwatch implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
             elapsedTime = elapsedTime + 10;
-            millisec = (elapsedTime / 10) % 1000;
+            millisec = (elapsedTime / 10) % 100;
             minutes = (elapsedTime / 60000) % 60;
             seconds = (elapsedTime / 1000) % 60;
             seconds_string = String.format("%02d", seconds);
@@ -46,8 +48,8 @@ public class Stopwatch implements ActionListener {
     });
 
 
-    Stopwatch() {
-
+    public Stopwatch() {
+        setupleaderboard();
         timeLabel.setText(minutes_string + ":" + seconds_string + ":" + millisec_string);
         timeLabel.setBounds(70, 100, 200, 100);
         timeLabel.setFont(new Font("Verdana", Font.PLAIN, 35));
@@ -73,6 +75,8 @@ public class Stopwatch implements ActionListener {
         frame.setSize(360, 1080);
         frame.setLayout(null);
         frame.setVisible(true);
+
+
     }
 
 
@@ -124,7 +128,7 @@ public class Stopwatch implements ActionListener {
 
     public void updateleaderboard()
     {
-        if (elapsedTime > leaderboard1)
+        if (elapsedTime < leaderboard1)
         {
             int temp1 = leaderboard1;
             int temp2 = leaderboard2;
@@ -136,8 +140,14 @@ public class Stopwatch implements ActionListener {
 
     public void setupleaderboard()
     {
-        JTextField Leaderboard = new JTextField();
-        Leaderboard.setText(leadername1 + "00:00:00");
-        Leaderboard.setBounds();
+        JTextArea leaderboardframe1 = new JTextArea();
+        leaderboardframe1.setText( "1." +  leadername1 + "      00:00:00"  + "\n\n 2." +  leadername2 +  "     00:00:00" + "\n\n 3." +  leadername3 +  "     00:00:00");
+        leaderboardframe1.setBounds(0, 600, 360, 300);
+        leaderboardframe1.setFont(new Font("Arial", Font.PLAIN, 30));
+        leaderboardframe1.setBorder(BorderFactory.createBevelBorder(0));
+        frame.add(leaderboardframe1);
+
+
+
     }
 }

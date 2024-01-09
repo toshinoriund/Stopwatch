@@ -9,27 +9,37 @@ public class Stopwatch implements ActionListener {
     JButton startButton = new JButton("START");
     JButton resetButton = new JButton("RESET");
     JLabel timeLabel = new JLabel();
-    int elapsedTime = 0;
-    int seconds = 0;
-    int minutes = 0;
-    int hours = 0;
-    boolean started = false;
-    String seconds_string = String.format("%02d", seconds);
-    String minutes_string = String.format("%02d", minutes);
-    String hours_string = String.format("%02d", hours);
+    private int elapsedTime = 0;
+    private int seconds = 0;
+    private int minutes = 0;
+    private int millisec = 0;
+
+    private String leadername1 = "N/A";
+    private String leadername2 = "N/A";
+    private String leadername3 = "N/A";
+
+
+    private int leaderboard1=0;
+    private int leaderboard2=0;
+    private int leaderboard3=0;
+
+    private boolean started = false;
+    private String seconds_string = String.format("%02d", seconds);
+    private String minutes_string = String.format("%02d", minutes);
+    private String millisec_string = String.format("%02d", millisec);
 
     Timer timer = new Timer(1, new ActionListener() {
 
         public void actionPerformed(ActionEvent e) {
 
             elapsedTime = elapsedTime + 10;
-            hours = (elapsedTime / 10) % 1000;
+            millisec = (elapsedTime / 10) % 1000;
             minutes = (elapsedTime / 60000) % 60;
             seconds = (elapsedTime / 1000) % 60;
             seconds_string = String.format("%02d", seconds);
             minutes_string = String.format("%02d", minutes);
-            hours_string = String.format("%02d", hours);
-            timeLabel.setText(minutes_string + ":" + seconds_string + ":" + hours_string);
+            millisec_string = String.format("%02d", millisec);
+            timeLabel.setText(minutes_string + ":" + seconds_string + ":" + millisec_string);
 
         }
 
@@ -38,7 +48,7 @@ public class Stopwatch implements ActionListener {
 
     Stopwatch() {
 
-        timeLabel.setText(minutes_string + ":" + seconds_string + ":" + hours_string);
+        timeLabel.setText(minutes_string + ":" + seconds_string + ":" + millisec_string);
         timeLabel.setBounds(70, 100, 200, 100);
         timeLabel.setFont(new Font("Verdana", Font.PLAIN, 35));
         timeLabel.setBorder(BorderFactory.createBevelBorder(1));
@@ -64,6 +74,8 @@ public class Stopwatch implements ActionListener {
         frame.setLayout(null);
         frame.setVisible(true);
     }
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -102,10 +114,15 @@ public class Stopwatch implements ActionListener {
         elapsedTime = 0;
         seconds = 0;
         minutes = 0;
-        hours = 0;
+        millisec = 0;
         seconds_string = String.format("%02d", seconds);
         minutes_string = String.format("%02d", minutes);
-        hours_string = String.format("%02d", hours);
-        timeLabel.setText(minutes_string + ":" + seconds_string + ":" + hours_string);
+        millisec_string = String.format("%02d", millisec);
+        timeLabel.setText(minutes_string + ":" + seconds_string + ":" + millisec_string);
+    }
+
+    public void updateleaderboard()
+    {
+        System.out.print("hi");
     }
 }

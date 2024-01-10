@@ -2,6 +2,10 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.text.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.stream.Stream;
 
 public class Stopwatch implements ActionListener {
 
@@ -18,7 +22,10 @@ public class Stopwatch implements ActionListener {
     private String leadername2 = "N/A";
     private String leadername3 = "N/A";
 
-    private Person[] leaders = new Person[3];
+    ArrayList<Person> leaders = new ArrayList<Person>();
+
+
+    private String name;
 
 
     private int leaderboard1=0;
@@ -47,9 +54,13 @@ public class Stopwatch implements ActionListener {
 
     });
 
+    Person person = new Person();
+
 
     public Stopwatch() {
         setupleaderboard();
+        name = person.askname();
+
         timeLabel.setText(minutes_string + ":" + seconds_string + ":" + millisec_string);
         timeLabel.setBounds(70, 100, 200, 100);
         timeLabel.setFont(new Font("Verdana", Font.PLAIN, 35));
@@ -115,6 +126,9 @@ public class Stopwatch implements ActionListener {
 
     void reset() {
         timer.stop();
+        leaders.add(new Person(name,elapsedTime));
+
+
 
         elapsedTime = 0;
         seconds = 0;
@@ -124,18 +138,22 @@ public class Stopwatch implements ActionListener {
         minutes_string = String.format("%02d", minutes);
         millisec_string = String.format("%02d", millisec);
         timeLabel.setText(minutes_string + ":" + seconds_string + ":" + millisec_string);
+        name = person.askname();
     }
 
     public void updateleaderboard()
     {
-        if (elapsedTime < leaderboard1)
-        {
-            int temp1 = leaderboard1;
-            int temp2 = leaderboard2;
-            leaderboard1 = elapsedTime;
-            leaderboard2= temp1;
-            leaderboard3= temp2;
-        }
+        leaders.sort(Comparator.comparing(Person::gettime));
+        JTextArea leaderboardframe1 = new JTextArea();
+        leaderboardframe1.setText( "1." +  leadername1 + "      00:00:00"
+                + "\n\n 2." +  leadername2 +  "     00:00:00"
+                + "\n\n 3." +  leadername3 +  "     00:00:00");
+
+
+
+
+
+
     }
 
     public void setupleaderboard()

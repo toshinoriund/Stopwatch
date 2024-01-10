@@ -40,6 +40,8 @@ public class Stopwatch implements ActionListener {
     private String minutes_string = String.format("%02d", minutes);
     private String millisec_string = String.format("%02d", millisec);
 
+    JTextArea leaderboardframe1 = new JTextArea();
+
     Timer timer = new Timer(1, new ActionListener() {
 
         public void actionPerformed(ActionEvent e) {
@@ -61,7 +63,6 @@ public class Stopwatch implements ActionListener {
 
     public Stopwatch() {
         setupleaderboard();
-        name = person.askname();
 
         timeLabel.setText(minutes_string + ":" + seconds_string + ":" + millisec_string);
         timeLabel.setBounds(70, 100, 200, 100);
@@ -88,6 +89,9 @@ public class Stopwatch implements ActionListener {
         frame.setSize(360, 1080);
         frame.setLayout(null);
         frame.setVisible(true);
+
+        leaders.add(new Person("ex",10000000));
+        leaders.add(new Person("ex2",10000000));
 
 
     }
@@ -128,13 +132,7 @@ public class Stopwatch implements ActionListener {
 
     void reset() {
         timer.stop();
-        leaders.add(new Person(name,elapsedTime));
-        leaders.add(new Person("ex",0));
-        leaders.add(new Person("ex",0));
         updateleaderboard();
-
-
-
         elapsedTime = 0;
         seconds = 0;
         minutes = 0;
@@ -143,19 +141,44 @@ public class Stopwatch implements ActionListener {
         minutes_string = String.format("%02d", minutes);
         millisec_string = String.format("%02d", millisec);
         timeLabel.setText(minutes_string + ":" + seconds_string + ":" + millisec_string);
-//        name = person.askname();
+
     }
 
     public void updateleaderboard()
     {
+        name = person.askname();
+        leaders.add(new Person(name,elapsedTime));
         leaders.sort(Comparator.comparing(Person::gettime));
-        JTextArea leaderboardframe1 = new JTextArea();
         Person person1 = (Person)(leaders.get(0));
         Person person2 = (Person)(leaders.get(1));
         Person person3 = (Person)(leaders.get(2));
-        leaderboardframe1.setText( "1." +  person1.getName() + "    " + person1.getMinutes()+ ":" + person1.getSeconds()+ ":" + person1.getMillisec()+
-                "\n\n2." +  person2.getName() + "    " + person2.getMinutes()+ ":" + person2.getSeconds()+ ":" + person3.getMillisec()+
-                "\n\n3." +  person3.getName() + "    " + person3.getMinutes()+ ":" + person2.getSeconds()+ ":" + person3.getMillisec());
+        System.out.println(leaders);
+        int a = person1.getMinutes();
+        int b = person2.getMinutes();
+        int c = person3.getMinutes();
+        int d = person1.getSeconds();
+        int e = person2.getSeconds();
+        int f = person3.getSeconds();
+        int g= person1.getMillisec();
+        int h= person2.getMillisec();
+        int i= person3.getMillisec();
+        String a_string = String.format("%02d", a);
+        String b_string = String.format("%02d", b);
+        String c_string = String.format("%02d", c);
+        String d_string = String.format("%02d", d);
+        String e_string = String.format("%02d", e);
+        String f_string = String.format("%02d", f);
+        String g_string = String.format("%02d", g);
+        String h_string = String.format("%02d", h);
+        String i_string = String.format("%02d", i);
+
+
+
+
+
+        leaderboardframe1.setText( "1." +  person1.getName() + "    " + a+ ":" + d+ ":" + g+
+                "\n\n2." +  person2.getName() + "    " + b+ ":" + e+ ":" + h+
+                "\n\n3." +  person3.getName() + "    " + c+ ":" + f+ ":" + i);
 
 
 
@@ -166,7 +189,6 @@ public class Stopwatch implements ActionListener {
 
     public void setupleaderboard()
     {
-        JTextArea leaderboardframe1 = new JTextArea();
         leaderboardframe1.setText( "1." +  leadername1 + "      00:00:00"  + "\n\n 2." +  leadername2 +  "     00:00:00" + "\n\n 3." +  leadername3 +  "     00:00:00");
         leaderboardframe1.setBounds(0, 600, 360, 300);
         leaderboardframe1.setFont(new Font("Arial", Font.PLAIN, 30));

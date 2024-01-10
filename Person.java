@@ -58,4 +58,9 @@ public class Person
         return millisec;
     }
 
+    public String toString()
+    {
+        return name + " Time: " + minutes + ":" + seconds + ":" + millisec;
+    }
+
 }

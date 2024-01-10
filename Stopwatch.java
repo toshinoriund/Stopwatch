@@ -1,11 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.text.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
-import java.util.stream.Stream;
 
 public class Stopwatch implements ActionListener {
 
@@ -22,7 +19,13 @@ public class Stopwatch implements ActionListener {
     private String leadername2 = "N/A";
     private String leadername3 = "N/A";
 
+    Person person = new Person();
+
+
     ArrayList<Person> leaders = new ArrayList<Person>();
+
+
+
 
 
     private String name;
@@ -54,7 +57,6 @@ public class Stopwatch implements ActionListener {
 
     });
 
-    Person person = new Person();
 
 
     public Stopwatch() {
@@ -127,6 +129,9 @@ public class Stopwatch implements ActionListener {
     void reset() {
         timer.stop();
         leaders.add(new Person(name,elapsedTime));
+        leaders.add(new Person("ex",0));
+        leaders.add(new Person("ex",0));
+        updateleaderboard();
 
 
 
@@ -138,16 +143,19 @@ public class Stopwatch implements ActionListener {
         minutes_string = String.format("%02d", minutes);
         millisec_string = String.format("%02d", millisec);
         timeLabel.setText(minutes_string + ":" + seconds_string + ":" + millisec_string);
-        name = person.askname();
+//        name = person.askname();
     }
 
     public void updateleaderboard()
     {
         leaders.sort(Comparator.comparing(Person::gettime));
         JTextArea leaderboardframe1 = new JTextArea();
-        leaderboardframe1.setText( "1." +  leadername1 + "      00:00:00"
-                + "\n\n 2." +  leadername2 +  "     00:00:00"
-                + "\n\n 3." +  leadername3 +  "     00:00:00");
+        Person person1 = (Person)(leaders.get(0));
+        Person person2 = (Person)(leaders.get(1));
+        Person person3 = (Person)(leaders.get(2));
+        leaderboardframe1.setText( "1." +  person1.getName() + "    " + person1.getMinutes()+ ":" + person1.getSeconds()+ ":" + person1.getMillisec()+
+                "\n\n2." +  person2.getName() + "    " + person2.getMinutes()+ ":" + person2.getSeconds()+ ":" + person3.getMillisec()+
+                "\n\n3." +  person3.getName() + "    " + person3.getMinutes()+ ":" + person2.getSeconds()+ ":" + person3.getMillisec());
 
 
 

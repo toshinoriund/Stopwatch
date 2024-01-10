@@ -37,4 +37,25 @@ public class Person
     {
         return timeused;
     }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public int getSeconds()
+    {
+        return seconds;
+    }
+
+    public int getMinutes()
+    {
+        return minutes;
+    }
+
+    public int getMillisec()
+    {
+        return millisec;
+    }
+
 }

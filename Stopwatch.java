@@ -46,7 +46,7 @@ public class Stopwatch implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
 
-            elapsedTime = elapsedTime + 10;
+            elapsedTime = elapsedTime + 16;
             millisec = (elapsedTime / 10) % 100;
             minutes = (elapsedTime / 60000) % 60;
             seconds = (elapsedTime / 1000) % 60;
@@ -65,18 +65,18 @@ public class Stopwatch implements ActionListener {
         setupleaderboard();
 
         timeLabel.setText(minutes_string + ":" + seconds_string + ":" + millisec_string);
-        timeLabel.setBounds(70, 100, 200, 100);
+        timeLabel.setBounds(50, 100, 200, 100);
         timeLabel.setFont(new Font("Verdana", Font.PLAIN, 35));
         timeLabel.setBorder(BorderFactory.createBevelBorder(1));
         timeLabel.setOpaque(true);
         timeLabel.setHorizontalAlignment(JTextField.CENTER);
 
-        startButton.setBounds(70, 200, 200, 50);
+        startButton.setBounds(50, 200, 200, 50);
         startButton.setFont(new Font("Ink Free", Font.PLAIN, 20));
         startButton.setFocusable(false);
         startButton.addActionListener(this);
 
-        resetButton.setBounds(70, 250, 200, 50);
+        resetButton.setBounds(50, 250, 200, 50);
         resetButton.setFont(new Font("Ink Free", Font.PLAIN, 20));
         resetButton.setFocusable(false);
         resetButton.addActionListener(this);
@@ -86,12 +86,12 @@ public class Stopwatch implements ActionListener {
         frame.add(timeLabel);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(360, 1080);
+        frame.setSize(300, 1080);
         frame.setLayout(null);
         frame.setVisible(true);
 
-        leaders.add(new Person("ex",10000000));
-        leaders.add(new Person("ex2",10000000));
+        leaders.add(new Person("EX",20000000));
+        leaders.add(new Person("EX",20000000));
 
 
     }
@@ -176,9 +176,9 @@ public class Stopwatch implements ActionListener {
 
 
 
-        leaderboardframe1.setText( "1." +  person1.getName() + "    " + a+ ":" + d+ ":" + g+
-                "\n\n2." +  person2.getName() + "    " + b+ ":" + e+ ":" + h+
-                "\n\n3." +  person3.getName() + "    " + c+ ":" + f+ ":" + i);
+        leaderboardframe1.setText( "1." +  person1.getName() + "    " + a_string+ ":" + d_string+ ":" + g_string+
+                "\n\n2." +  person2.getName() + "    " + b_string+ ":" + e_string+ ":" + h_string+
+                "\n\n3." +  person3.getName() + "    " + c_string+ ":" + f_string+ ":" + i_string);
 
 
 
@@ -190,7 +190,7 @@ public class Stopwatch implements ActionListener {
     public void setupleaderboard()
     {
         leaderboardframe1.setText( "1." +  leadername1 + "      00:00:00"  + "\n\n 2." +  leadername2 +  "     00:00:00" + "\n\n 3." +  leadername3 +  "     00:00:00");
-        leaderboardframe1.setBounds(0, 600, 360, 300);
+        leaderboardframe1.setBounds(0, 600, 300, 300);
         leaderboardframe1.setFont(new Font("Arial", Font.PLAIN, 30));
         leaderboardframe1.setBorder(BorderFactory.createBevelBorder(0));
         frame.add(leaderboardframe1);
